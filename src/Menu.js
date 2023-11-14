@@ -58,9 +58,21 @@ class Menu {
     return this.menuDict;
   }
 
+  findCategory(menuName) {
+    for (let category in MENU) {
+      if (menuName in MENU[category]) {
+        return category;
+      }
+    }
+  }
+
   returnAmountSum() {
     let amountSum = 0
-    Object.keys(this.menuDict).forEach((key) => amountSum += this.menuDict[key]);
+    for (let menu in this.menuDict) {
+      const category = this.findCategory(menu);
+      const price = MENU[category][menu];
+      amountSum += price * this.menuDict[menu];
+    }
     return amountSum;
   }
 }
