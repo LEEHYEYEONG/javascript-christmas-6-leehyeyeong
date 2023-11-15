@@ -1,4 +1,4 @@
-import { MENU, MESSAGE, NUMBER } from "./Constant.js";
+import { KEY, MENU, MESSAGE, NUMBER } from "./Constant.js";
 
 function findCategory(menuName) {
   for (let category in MENU) {
@@ -20,7 +20,7 @@ function findMenu(menu, target) {
 }
 
 export function ddayDiscount(discount) {
-  const ddayDiscount = discount["dday"];
+  const ddayDiscount = discount[KEY.DDAY];
   return ddayDiscount;
 }
 
