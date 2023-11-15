@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import { MENU, MESSAGE, NUMBER } from "./Constant.js";
 
 class Menu {
