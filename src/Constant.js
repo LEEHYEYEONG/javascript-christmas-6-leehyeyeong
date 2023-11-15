@@ -21,11 +21,22 @@ export const MESSAGE = {
   CHAMPAGNE: "샴페인 1개",
   SPACE: " ",
   MINUS: "-",
+  SANTA: "산타",
+  TREE: "트리",
+  STAR: "별",
+  MAIN: "MAIN",
+  DESSERT: "DESSERT",
 }
 
 export const NUMBER = {
   ZERO: 0,
   DISCOUNTCRITERIA: 10000,
+  DISCOUNT: 2023,
+  SPECIALDISCOUNT: 1000,
+  ITEMBENEFIT: 25000,
+  SANTA: 20000,
+  TREE: 10000,
+  STAR: 5000,
 }
 
 export const MENU = {

@@ -1,4 +1,4 @@
-import { MENU } from "./Constant.js";
+import { MENU, MESSAGE, NUMBER } from "./Constant.js";
 
 function findCategory(menuName) {
   for (let category in MENU) {
@@ -9,11 +9,11 @@ function findCategory(menuName) {
 }
 
 function findMenu(menu, target) {
-  let discountSum = 0
+  let discountSum = NUMBER.ZERO;
   for (let name in menu) {
     const category = findCategory(name);
     if (category == target) {
-      discountSum += 2023 * menu[name];
+      discountSum += NUMBER.DISCOUNT * menu[name];
     }
   }
   return discountSum;
@@ -26,27 +26,27 @@ export function ddayDiscount(discount) {
 
 export function weekendDiscount(weekend, menu) {
   if (weekend) {
-    return findMenu(menu, 'MAIN');
+    return findMenu(menu, MESSAGE.MAIN);
   } else {
-    return findMenu(menu, 'DESSERT');
+    return findMenu(menu, MESSAGE.DESSERT);
   }
 }
 
 export function specialDiscount() {
-  return 1000;
+  return NUMBER.SPECIALDISCOUNT;
 }
 
 export function itemBenefits() {
-  return 25000;
+  return NUMBER.ITEMBENEFIT;
 }
 
 export function badge(totalBenefit) {
-  if (totalBenefit > 20000) {
-    return "산타";
-  } else if (totalBenefit > 10000) {
-    return "트리";
-  } else if (totalBenefit > 5000) {
-    return "별";
+  if (totalBenefit > NUMBER.SANTA) {
+    return MESSAGE.SANTA;
+  } else if (totalBenefit > NUMBER.TREE) {
+    return MESSAGE.TREE;
+  } else if (totalBenefit > NUMBER.STAR) {
+    return MESSAGE.STAR;
   }
-  return "없음";
+  return MESSAGE.NOTHING;
 }
