@@ -4,13 +4,6 @@ export const MESSAGE = {
   PRINTMENU: "<주문 메뉴>",
   PREDISCOUNT: "<할인 전 총주문 금액>",
   GIVEITEM: "<증정 메뉴>",
-  DISCOUNT: {
-    DDAY: "크리스마스 디데이 할인: -",
-    WEEKEND: "주말 할인: -",
-    WEEKDAY: "평일 할인: -",
-    SPECIAL: "특별 할인: -",
-    GIVEITEM: "증정 이벤트: -",
-  },
   BENEFITLIST: "<혜택 내역>",
   TOTALBENEFIT: "<총혜택 금액>",
   EXPECTPRICE: "<할인 후 예상 결제 금액>",
@@ -26,10 +19,25 @@ export const MESSAGE = {
   STAR: "별",
   MAIN: "MAIN",
   DESSERT: "DESSERT",
+  DISCOUNT: {
+    DDAY: "크리스마스 디데이 할인: -",
+    WEEKEND: "주말 할인: -",
+    WEEKDAY: "평일 할인: -",
+    SPECIAL: "특별 할인: -",
+    GIVEITEM: "증정 이벤트: -",
+  },
+  ERROR: {
+    DAY: "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.",
+  }
 }
 
 export const NUMBER = {
   ZERO: 0,
+  ONE: 1,
+  THIRTYONE: 31,
+  TWENTYFIVE: 25,
+  ONEHUNDRED: 100,
+  ONETHOUSAND: 1000,
   DISCOUNTCRITERIA: 10000,
   DISCOUNT: 2023,
   SPECIALDISCOUNT: 1000,
@@ -37,6 +45,11 @@ export const NUMBER = {
   SANTA: 20000,
   TREE: 10000,
   STAR: 5000,
+}
+
+export const BOOL = {
+  TRUE: true,
+  FALSE: false,
 }
 
 export const MENU = {
@@ -52,4 +65,4 @@ export const WEEKEND = [1, 2, 8, 9, 15, 16, 22, 23, 29, 30]
 
 export const SPECIAL = [3, 10, 17, 24, 25, 31]
 
-export default { MESSAGE, NUMBER, MENU, WEEKDAY, WEEKEND, SPECIAL }
+export default { MESSAGE, NUMBER, BOOL, MENU, WEEKDAY, WEEKEND, SPECIAL }
