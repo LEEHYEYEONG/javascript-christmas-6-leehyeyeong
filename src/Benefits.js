@@ -1,6 +1,6 @@
 import { KEY, MENU, MESSAGE, NUMBER } from "./Constant.js";
 
-function findCategory(menuName) {
+export function findCategory(menuName) {
   for (let category in MENU) {
     if (menuName in MENU[category]) {
       return category;
@@ -8,7 +8,7 @@ function findCategory(menuName) {
   }
 }
 
-function findMenu(menu, target) {
+export function findMenu(menu, target) {
   let discountSum = NUMBER.ZERO;
   for (let name in menu) {
     const category = findCategory(name);
