@@ -2,6 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import InputView from "./InputView.js";
 import { returnItem } from "./Item.js";
 import { badge, ddayDiscount, itemBenefits, specialDiscount, weekendDiscount } from "./Benefits.js";
+import { MESSAGE, NUMBER } from "./Constant.js";
 
 const commaPrice = (str) => {
   return str.toString().replace(PATTERN, ',');
@@ -11,70 +12,76 @@ const PATTERN = /\B(?=(\d{3})+(?!\d))/g;
 
 const OutputView = {
   printGreet() {
-    Console.print("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+    Console.print(MESSAGE.GREET);
   },
+
   async printMenu() {
     const menu = await InputView.readMenu();
-    Console.print("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-    Console.print("")
-    Console.print("<주문 메뉴>");
+    Console.print(MESSAGE.PREVIEW);
+    Console.print(MESSAGE.SPACE)
+    Console.print(MESSAGE.PRINTMENU);
     for (let key in menu[0]) {
-      Console.print(key + " " + menu[0][key] + "개");
+      Console.print(key + MESSAGE.SPACE + menu[0][key] + MESSAGE.NUM);
     }
-    Console.print("");
-    Console.print("<할인 전 총주문 금액>")
-    Console.print(menu[1].toString().replace(PATTERN, ',') + "원");
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.PREDISCOUNT)
+    Console.print(commaPrice(menu[1]) + MESSAGE.WON);
     const item = this.printItem(menu);
     return item;
   },
+
   printItem(menu) {
-    Console.print("");
-    Console.print("<증정 메뉴>")
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.GIVEITEM)
     const item = returnItem(menu[1])
-    if (Object.values(item)[0] == 0) {
-      Console.print("없음");
+    if (Object.values(item)[0] == NUMBER.ZERO) {
+      Console.print(MESSAGE.NOTHING);
     } else {
-      Console.print("샴페인 1개");
+      Console.print(MESSAGE.CHAMPAGNE);
     }
     return [item, menu];
   },
+
   printDdayDiscount(discount) {
-    if (ddayDiscount(discount) > 0) {
-      Console.print("크리스마스 디데이 할인: -" + commaPrice(ddayDiscount(discount)) + "원");
+    if (ddayDiscount(discount) > NUMBER.ZERO) {
+      Console.print(MESSAGE.DISCOUNT.DDAY + commaPrice(ddayDiscount(discount)) + MESSAGE.WON);
       return ddayDiscount(discount)
     }
-    return 0;
+    return NUMBER.ZERO;
   },
+
   printWeekDiscount(weekend, menu) {
     const weekDiscount = weekendDiscount(weekend, menu);
     if (weekend) {
-      Console.print("주말 할인: -" + commaPrice(weekDiscount) + "원");
+      Console.print(MESSAGE.DISCOUNT.WEEKEND + commaPrice(weekDiscount) + MESSAGE.WON);
     } else {
-      Console.print("평일 할인: -" + commaPrice(weekDiscount) + "원");
+      Console.print(MESSAGE.DISCOUNT.WEEKDAY + commaPrice(weekDiscount) + MESSAGE.WON);
     }
     return weekDiscount
   },
+
   printSpecialDiscount(special) {
     if (special) {
-      Console.print("특별 할인: -" + commaPrice(specialDiscount()) + "원");
+      Console.print(MESSAGE.DISCOUNT.SPECIAL + commaPrice(specialDiscount()) + MESSAGE.WON);
       return specialDiscount();
     }
-    return 0;
+    return NUMBER.ZERO;
   },
+
   printItemDiscount(item) {
-    if (item != 0) {
-      Console.print("증정 이벤트: -" + commaPrice(itemBenefits()) + "원");
+    if (item != NUMBER.ZERO) {
+      Console.print(MESSAGE.DISCOUNT.GIVEITEM + commaPrice(itemBenefits()) + MESSAGE.WON);
       return itemBenefits();
     }
-    return 0;
+    return NUMBER.ZERO;
   },
 
   printBenefits(discount, item) {
-    Console.print("");
-    Console.print("<혜택 내역>")
-    if (parseInt(item[1][1]) < 10000) {
-      Console.print("없음");
-      return [0, 0];
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.BENEFITLIST)
+    if (parseInt(item[1][1]) < NUMBER.DISCOUNTCRITERIA) {
+      Console.print(MESSAGE.NOTHING);
+      return [NUMBER.ZERO, NUMBER.ZERO];
     }
     else {
       const ddayBenefit = this.printDdayDiscount(discount);
@@ -87,20 +94,21 @@ const OutputView = {
   },
 
   printTotalBenefits(totalBenefit, amoutSum) {
-    Console.print("");
-    Console.print("<총혜택 금액>")
-    if (totalBenefit[0] == 0) {
-      Console.print(totalBenefit[0] + "원");
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.TOTALBENEFIT)
+    if (totalBenefit[0] == NUMBER.ZERO) {
+      Console.print(totalBenefit[0] + MESSAGE.WON);
     } else {
-      Console.print("-" + commaPrice(totalBenefit[0]) + "원");
+      Console.print(MESSAGE.MINUS + commaPrice(totalBenefit[0]) + MESSAGE.WON);
     }
-    Console.print("");
-    Console.print("<할인 후 예상 결제 금액>")
-    Console.print(commaPrice(amoutSum - (totalBenefit[0] - totalBenefit[1]) + "원"));
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.EXPECTPRICE)
+    Console.print(commaPrice(amoutSum - (totalBenefit[0] - totalBenefit[1]) + MESSAGE.WON));
   },
+
   printBadge(totalBenefit) {
-    Console.print("");
-    Console.print("<12월 이벤트 배지>");
+    Console.print(MESSAGE.SPACE);
+    Console.print(MESSAGE.BADGE);
     Console.print(badge(totalBenefit));
   }
 }
