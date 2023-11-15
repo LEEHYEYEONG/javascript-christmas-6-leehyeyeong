@@ -1,4 +1,4 @@
-import { BOOL, MESSAGE, NUMBER, SPECIAL, WEEKEND } from "./Constant.js";
+import { BOOL, KEY, MESSAGE, NUMBER, SPECIAL, WEEKEND } from "./Constant.js";
 
 class Day {
   constructor(day) {
@@ -13,9 +13,9 @@ class Day {
   }
   discount() {
     const dayDiscount = { dday: NUMBER.ZERO, weekend: false, special: false }
-    dayDiscount["dday"] = this.ddayDiscount();
-    dayDiscount["weekend"] = this.weekendDisCount();
-    dayDiscount["special"] = this.specialDiscount();
+    dayDiscount[KEY.DDAY] = this.ddayDiscount();
+    dayDiscount[KEY.WEEKEND] = this.weekendDisCount();
+    dayDiscount[KEY.SPECIAL] = this.specialDiscount();
     return dayDiscount;
   }
   ddayDiscount() {
