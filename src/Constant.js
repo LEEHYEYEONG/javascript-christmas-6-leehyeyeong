@@ -1,5 +1,7 @@
 export const MESSAGE = {
   GREET: "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.",
+  INPUTDAY: "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n",
+  INPUTMENU: "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n",
   PREVIEW: "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!",
   PRINTMENU: "<주문 메뉴>",
   PREDISCOUNT: "<할인 전 총주문 금액>",
@@ -13,12 +15,14 @@ export const MESSAGE = {
   WON: "원",
   CHAMPAGNE: "샴페인 1개",
   SPACE: " ",
+  COMMA: ",",
   MINUS: "-",
   SANTA: "산타",
   TREE: "트리",
   STAR: "별",
   MAIN: "MAIN",
   DESSERT: "DESSERT",
+  DRINK: "DRINK",
   DISCOUNT: {
     DDAY: "크리스마스 디데이 할인: -",
     WEEKEND: "주말 할인: -",
@@ -28,12 +32,15 @@ export const MESSAGE = {
   },
   ERROR: {
     DAY: "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.",
-  }
+    ORDER: "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.",
+  },
 }
 
 export const NUMBER = {
   ZERO: 0,
   ONE: 1,
+  TWO: 2,
+  TWENTY: 20,
   THIRTYONE: 31,
   TWENTYFIVE: 25,
   ONEHUNDRED: 100,
@@ -41,6 +48,7 @@ export const NUMBER = {
   DISCOUNTCRITERIA: 10000,
   DISCOUNT: 2023,
   SPECIALDISCOUNT: 1000,
+  ITEMCRITERIA: 120000,
   ITEMBENEFIT: 25000,
   SANTA: 20000,
   TREE: 10000,
@@ -50,6 +58,12 @@ export const NUMBER = {
 export const BOOL = {
   TRUE: true,
   FALSE: false,
+}
+
+export const KEY = {
+  DDAY: "dday",
+  WEEKEND: "weekend",
+  SPECIAL: "special",
 }
 
 export const MENU = {
@@ -65,4 +79,4 @@ export const WEEKEND = [1, 2, 8, 9, 15, 16, 22, 23, 29, 30]
 
 export const SPECIAL = [3, 10, 17, 24, 25, 31]
 
-export default { MESSAGE, NUMBER, BOOL, MENU, WEEKDAY, WEEKEND, SPECIAL }
+export default { MESSAGE, NUMBER, BOOL, KEY, MENU, WEEKDAY, WEEKEND, SPECIAL }

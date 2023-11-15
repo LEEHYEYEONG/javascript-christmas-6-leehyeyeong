@@ -1,52 +1,52 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MENU } from "./Constant.js";
+import { MENU, MESSAGE, NUMBER } from "./Constant.js";
 
 class Menu {
   constructor(menu) {
-    this.menu = menu.includes(",") ? menu.split(',').flatMap(part => part.split('-')) : menu.split('-');
-    this.menuName = this.menu.filter((_, index) => index % 2 === 0);
-    this.menuDict = this.menu.reduce((acc, cur, i) => (i % 2 === 0 ? { ...acc, [cur]: parseInt(this.menu[i + 1]) } : acc), {});
+    this.menu = menu.includes(MESSAGE.COMMA) ? menu.split(MESSAGE.COMMA).flatMap(part => part.split(MESSAGE.MINUS)) : menu.split(MESSAGE.MINUS);
+    this.menuName = this.menu.filter((_, index) => index % NUMBER.TWO === NUMBER.ZERO);
+    this.menuDict = this.menu.reduce((acc, cur, i) => (i % NUMBER.TWO === NUMBER.ZERO ? { ...acc, [cur]: parseInt(this.menu[i + NUMBER.ONE]) } : acc), {});
   }
 
   menuExist(key) {
     if (!Object.values(MENU).some(category => key in category)) {
-      throw new Error("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+      throw new Error(MESSAGE.ERROR.ORDER);
     }
   }
 
   menuNum(key) {
-    if (this.menuDict[key] < 1 || isNaN(this.menuDict[key])) {
-      throw new Error("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    if (this.menuDict[key] < NUMBER.ONE || isNaN(this.menuDict[key])) {
+      throw new Error(MESSAGE.ERROR.ORDER);
     }
   }
 
   menuDuplicate() {
     if (this.menuName.length != new Set(this.menuName).size) {
-      throw new Error("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+      throw new Error(MESSAGE.ERROR.ORDER);
     }
   }
 
   menuAdd(menuSum) {
-    if (menuSum > 20) {
-      throw new Error("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    if (menuSum > NUMBER.TWENTY) {
+      throw new Error(MESSAGE.ERROR.ORDER);
     }
   }
 
   drinkAdd(drinkSum) {
     if (Object.keys(this.menuDict).length === drinkSum) {
-      throw new Error("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+      throw new Error(MESSAGE.ERROR.ORDER);
     }
   }
 
   menuValidate() {
-    let menuSum = 0
-    let drinkSum = 0
+    let menuSum = NUMBER.ZERO
+    let drinkSum = NUMBER.ZERO
     this.menuDuplicate();
     for (let key in this.menuDict) {
       this.menuExist(key);
       this.menuNum(key);
-      if (key in MENU["DRINK"]) {
-        drinkSum += 1
+      if (key in MENU[MESSAGE.DRINK]) {
+        drinkSum += NUMBER.ONE
       }
       menuSum += this.menuDict[key]
     }
@@ -67,7 +67,7 @@ class Menu {
   }
 
   returnAmountSum() {
-    let amountSum = 0
+    let amountSum = NUMBER.ZERO
     for (let menu in this.menuDict) {
       const category = this.findCategory(menu);
       const price = MENU[category][menu];
